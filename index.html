@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Floating Button Trailer Page</title>
+    <title>Floating Buttons Page</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -23,49 +23,91 @@
             padding: 15px 25px;
             font-size: 18px;
             color: #ffffff;
-            background-color: #e83e8c;
             border: none;
             border-radius: 10px;
             text-decoration: none;
             transition: background-color 0.3s ease, transform 0.2s ease;
             will-change: transform;
         }
-        .button:hover {
+        .button1 {
+            background-color: #e83e8c;
+        }
+        .button1:hover {
             background-color: #d63384;
+        }
+        .button2 {
+            background-color: #3498db;
+        }
+        .button2:hover {
+            background-color: #2980b9;
+        }
+        .fullscreen-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .fullscreen-overlay img {
+            max-width: 90%;
+            max-height: 90%;
         }
     </style>
 </head>
 <body>
     <h1>Nothing like beduine coffee in a warm afternoon!</h1>
-    <a href="https://www.youtube.com/watch?v=-SY-aeSplco" class="button" target="_blank">Watch Trailer</a>
+    <a href="https://www.youtube.com/watch?v=-SY-aeSplco" class="button button1" target="_blank">Watch Trailer</a>
+    <a href="#" class="button button2" id="showGif">Show GIF</a>
+
+    <div class="fullscreen-overlay" id="overlay">
+        <img src="https://raw.githubusercontent.com/KamilaBu/Newone/main/vape-vaping.gif" alt="GIF">
+    </div>
 
     <script>
-        const button = document.querySelector('.button');
-        const body = document.body;
-        const buttonWidth = button.offsetWidth;
-        const buttonHeight = button.offsetHeight;
-        let x = Math.random() * (window.innerWidth - buttonWidth);
-        let y = Math.random() * (window.innerHeight - buttonHeight);
-        let dx = (Math.random() - 0.5) * 4;
-        let dy = (Math.random() - 0.5) * 4;
+        const buttons = document.querySelectorAll('.button');
+        const overlay = document.getElementById('overlay');
+        const buttonWidth = buttons[0].offsetWidth;
+        const buttonHeight = buttons[0].offsetHeight;
 
-        function animate() {
-            x += dx;
-            y += dy;
+        function animate(button) {
+            let x = Math.random() * (window.innerWidth - buttonWidth);
+            let y = Math.random() * (window.innerHeight - buttonHeight);
+            let dx = (Math.random() - 0.5) * 4;
+            let dy = (Math.random() - 0.5) * 4;
 
-            if (x + buttonWidth > window.innerWidth || x < 0) {
-                dx = -dx;
+            function move() {
+                x += dx;
+                y += dy;
+
+                if (x + buttonWidth > window.innerWidth || x < 0) {
+                    dx = -dx;
+                }
+
+                if (y + buttonHeight > window.innerHeight || y < 0) {
+                    dy = -dy;
+                }
+
+                button.style.transform = `translate(${x}px, ${y}px)`;
+                requestAnimationFrame(move);
             }
 
-            if (y + buttonHeight > window.innerHeight || y < 0) {
-                dy = -dy;
-            }
-
-            button.style.transform = `translate(${x}px, ${y}px)`;
-            requestAnimationFrame(animate);
+            move();
         }
 
-        animate();
+        buttons.forEach(button => animate(button));
+
+        document.getElementById('showGif').addEventListener('click', () => {
+            overlay.style.display = 'flex';
+        });
+
+        overlay.addEventListener('click', () => {
+            overlay.style.display = 'none';
+        });
     </script>
 </body>
 </html>
