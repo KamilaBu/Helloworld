@@ -3,23 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rahat</title>
+    <title>Super Cool Trailer Page</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f8f9fa;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
         }
         h1 {
-            color: #333;
+            margin-bottom: 20px;
+            color: #e83e8c;
+        }
+        .button {
+            display: inline-block;
+            padding: 15px 25px;
+            font-size: 18px;
+            color: #ffffff;
+            background-color: #e83e8c;
+            border: none;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #d63384;
         }
     </style>
 </head>
 <body>
-    <h1>"RAHATCITY"</h1>
+    <div class="container">
+        <h1>Check Out the Trailer!</h1>
+        <a href="https://www.youtube.com/watch?v=YOUR_TRAILER_ID" class="button" target="_blank">Watch Trailer</a>
+    </div>
 </body>
 </html>
