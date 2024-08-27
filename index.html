@@ -3,34 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Super Cool Trailer Page</title>
+    <title>Floating Button Trailer Page</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background: #f8f9fa;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            color: #333;
-            text-align: center;
-        }
-        .container {
-            background: #ffffff;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            max-width: 400px;
-            width: 100%;
+            overflow: hidden;
+            position: relative;
         }
         h1 {
-            margin-bottom: 20px;
+            text-align: center;
             color: #e83e8c;
+            margin-top: 100px;
         }
         .button {
-            display: inline-block;
+            position: absolute;
             padding: 15px 25px;
             font-size: 18px;
             color: #ffffff;
@@ -38,7 +27,8 @@
             border: none;
             border-radius: 10px;
             text-decoration: none;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            will-change: transform;
         }
         .button:hover {
             background-color: #d63384;
@@ -46,9 +36,36 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Check Out the Trailer!</h1>
-        <a href="https://www.youtube.com/watch?v=YOUR_TRAILER_ID" class="button" target="_blank">Watch Trailer</a>
-    </div>
+    <h1>Check Out the Trailer!</h1>
+    <a href="https://www.youtube.com/watch?v=-SY-aeSplco" class="button" target="_blank">Watch Trailer</a>
+
+    <script>
+        const button = document.querySelector('.button');
+        const body = document.body;
+        const buttonWidth = button.offsetWidth;
+        const buttonHeight = button.offsetHeight;
+        let x = Math.random() * (window.innerWidth - buttonWidth);
+        let y = Math.random() * (window.innerHeight - buttonHeight);
+        let dx = (Math.random() - 0.5) * 4;
+        let dy = (Math.random() - 0.5) * 4;
+
+        function animate() {
+            x += dx;
+            y += dy;
+
+            if (x + buttonWidth > window.innerWidth || x < 0) {
+                dx = -dx;
+            }
+
+            if (y + buttonHeight > window.innerHeight || y < 0) {
+                dy = -dy;
+            }
+
+            button.style.transform = `translate(${x}px, ${y}px)`;
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
 </body>
 </html>
